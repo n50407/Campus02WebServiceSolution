@@ -22,10 +22,11 @@ namespace Campus02WebService.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
+            return NotFound();
             //TODO Implement IActionResult
-            return "value";
+            
         }
 
         // POST api/<ProductController>
