@@ -16,6 +16,7 @@ namespace Campus02WebService.Controllers
         [HttpGet]
         public List<Product> Get()
         {
+            
             return products;
         }
 
@@ -23,6 +24,7 @@ namespace Campus02WebService.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            //TODO Implement IActionResult
             return "value";
         }
 
@@ -30,19 +32,21 @@ namespace Campus02WebService.Controllers
         [HttpPost]
         public void Post(Product newProduct)
         {
+            //TODO Implement -IActionResult
             products.Add(newProduct);
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
-        {
+        {//TODO Implement -IActionResult
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            //TODO Implement - IActionResult
         }
     }
 }
