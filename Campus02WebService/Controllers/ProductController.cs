@@ -24,17 +24,34 @@ namespace Campus02WebService.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return NotFound();
-            //TODO Implement IActionResult
+            try
+            {
+                //return NotFound();
+                //TODO Implement IActionResult
+                Product product = products.Find(p => p.Id == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return Ok(product);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+          
             
         }
 
         // POST api/<ProductController>
         [HttpPost]
-        public void Post(Product newProduct)
+        public IActionResult Post(Product newProduct)
         {
             //TODO Implement -IActionResult
             products.Add(newProduct);
+            return CreatedAtAction(nameof(Post), 
+                new { id = newProduct.Id }, newProduct);
         }
 
         // PUT api/<ProductController>/5
