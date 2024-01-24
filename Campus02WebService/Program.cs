@@ -1,5 +1,7 @@
 
+using Campus02WebService.Models;
 using Campus02WebService.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Campus02WebService
 {
@@ -24,6 +26,9 @@ namespace Campus02WebService
             builder.Services.Add(
                 new ServiceDescriptor(typeof(ILieferkostenCalculator),
                 new LieferkostenCalculator()));
+
+            builder.Services.AddDbContext<TodoContext>(opt =>
+    opt.UseInMemoryDatabase("TodoList"));
 
             var app = builder.Build();
 
