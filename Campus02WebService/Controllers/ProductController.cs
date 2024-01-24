@@ -1,5 +1,6 @@
 ﻿
 using Campus02WebService.Models;
+using Campus02WebService.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -48,7 +49,14 @@ namespace Campus02WebService.Controllers
         [HttpPost]
         public IActionResult Post(Product newProduct)
         {
-            //TODO Implement -IActionResult
+           
+            LieferkostenCalculator calculator = 
+                new LieferkostenCalculator();
+
+            newProduct.Lieferkosten =
+                calculator.
+                CalculateLieferkosten(newProduct.Gewicht);
+
             products.Add(newProduct);
             return CreatedAtAction(nameof(Post), 
                 new { id = newProduct.Id }, newProduct);

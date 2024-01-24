@@ -6,5 +6,8 @@
         public int Id { get; set; }
         public string Beschreibung { get; set; }
 
+        public double Gewicht { get; set; }
+        public double Lieferkosten { get; set; }
+
     }
 }
