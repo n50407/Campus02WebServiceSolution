@@ -2,6 +2,7 @@
 using Campus02WebService.Models;
 using Campus02WebService.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,11 +14,14 @@ namespace Campus02WebService.Controllers
     {
         //private Member Variable zeigt später auf LieferkostenCalculator
         private ILieferkostenCalculator _calculator;
+        private IConfiguration _configuration;
 
         //konstruktor injection
-        public ProductController(ILieferkostenCalculator calculator)
+        public ProductController(ILieferkostenCalculator calculator,
+            IConfiguration configuration)
         {
             _calculator = calculator;
+            _configuration = configuration;
         }
 
         static List<Product> products = new List<Product>();
@@ -65,6 +69,12 @@ namespace Campus02WebService.Controllers
             newProduct.Lieferkosten =
                 _calculator.
                 CalculateLieferkosten(newProduct.Gewicht);
+
+            newProduct.Beschreibung +=
+                _configuration["ProductSuffix"];
+
+            //ÜBER DI den Suffix aus appsettings.json auslesen
+            //und in die Beschreibung einfügen
 
             products.Add(newProduct);
             return CreatedAtAction(nameof(Post), 
