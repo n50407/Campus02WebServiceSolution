@@ -1,4 +1,6 @@
 
+using Campus02WebService.Services;
+
 namespace Campus02WebService
 {
     public class Program
@@ -13,6 +15,15 @@ namespace Campus02WebService
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //1. Inferface extrahieren
+            //2. Klasse erstellen / Interface implementieren
+            //3. Inferface als Service registrieren
+            //3. Im Controller Konstruktor Injection
+
+            builder.Services.Add(
+                new ServiceDescriptor(typeof(ILieferkostenCalculator),
+                new LieferkostenCalculator()));
 
             var app = builder.Build();
 

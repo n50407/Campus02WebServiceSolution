@@ -11,6 +11,15 @@ namespace Campus02WebService.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        //private Member Variable zeigt später auf LieferkostenCalculator
+        private ILieferkostenCalculator _calculator;
+
+        //konstruktor injection
+        public ProductController(ILieferkostenCalculator calculator)
+        {
+            _calculator = calculator;
+        }
+
         static List<Product> products = new List<Product>();
 
         // GET: api/<ProductController>
@@ -49,12 +58,12 @@ namespace Campus02WebService.Controllers
         [HttpPost]
         public IActionResult Post(Product newProduct)
         {
-           
-            LieferkostenCalculator calculator = 
-                new LieferkostenCalculator();
+           //Dependency LieferkostenCalculator
+            /*ILieferkostenCalculator calculator = 
+                new LieferkostenCalculator();*/
 
             newProduct.Lieferkosten =
-                calculator.
+                _calculator.
                 CalculateLieferkosten(newProduct.Gewicht);
 
             products.Add(newProduct);

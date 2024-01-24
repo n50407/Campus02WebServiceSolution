@@ -1,6 +1,6 @@
 ﻿namespace Campus02WebService.Services
 {
-    public class LieferkostenCalculator
+    public class LieferkostenCalculator : ILieferkostenCalculator
     {
         public double CalculateLieferkosten(double gewicht)
         {
@@ -12,6 +12,6 @@
             {
                 return 50;
             }
-        }   
+        }
     }
 }
